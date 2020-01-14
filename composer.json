@@ -1,6 +1,6 @@
 {
-    "name": "drupal/recommended-project",
-    "description": "Project template for Drupal 8 projects with a relocated document root",
+   	"name": "novartis/nvs-core",	
+  	"description": "Novartis CORE Distribution.",
     "type": "project",
     "license": "GPL-2.0-or-later",
     "homepage": "https://www.drupal.org/project/drupal",
@@ -14,11 +14,40 @@
             "url": "https://packages.drupal.org/8"
         }
     ],
+    "asset-packagist": {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    	}
+  	},
     "require": {
+    	 "php": ">=7.2",
+    	"acquia/blt": "^10.5.0",
+    	"acquia/drupal-spec-tool": "*",
+    	"acquia/lightning": "^4.0",
+    	"acquia/memcache-settings": "*",
         "composer/installers": "^1.2",
         "drupal/core-composer-scaffold": "^8.8",
         "drupal/core-project-message": "^8.8",
-        "drupal/core-recommended": "^8.8"
+        "drupal/core-recommended": "^8.8",
+        "drupal/acquia_connector": "^1.5.0",
+        "drupal/acquia_purge": "^1.0-beta3",
+        "drupal/admin_toolbar": "^1.24",
+        "drupal/cog": "^1.0.0",
+        "drupal/config_split": "^1.0.0",
+        "drupal/console": "^1.0.2",
+        "drupal/devel": "^2.0.0",
+        "drupal/extlink": "^1.1",
+        "drupal/ga_login": "^1.0@alpha",
+        "drupal/qa_accounts": "^1.0.0-alpha1",
+        "drupal/seckit": "^1.0.0-alpha2",
+        "drupal/shield": "^1.2.0",
+        "drupal/simplesamlphp_auth": "^3.1",
+        "drupal/tfa": "^1.0@alpha",
+        "drupal/upgrade_status": "^1.1",
+        "drush/drush": "^9.0.0",
+        "vlucas/phpdotenv": "^2.4",
+        "webmozart/path-util": "^2.3",
+        "zaporylie/composer-drupal-optimizations": "^1.0",
     },
     "require-dev": {
         "drupal/core-dev": "^8.8"
@@ -32,39 +61,36 @@
         "sort-packages": true
     },
     "extra": {
-        "drupal-scaffold": {
-            "locations": {
-                "web-root": "web/"
+        "enable-patching": true,
+    	"composer-exit-on-patch-failure": true,
+    	"patchLevel": {
+      	"drupal/core": "-p2"
             }
         },
         "installer-paths": {
-            "web/core": ["type:drupal-core"],
-            "web/libraries/{$name}": ["type:drupal-library"],
-            "web/modules/contrib/{$name}": ["type:drupal-module"],
-            "web/profiles/contrib/{$name}": ["type:drupal-profile"],
-            "web/themes/contrib/{$name}": ["type:drupal-theme"],
-            "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
-            "web/modules/custom/{$name}": ["type:drupal-custom-module"],
-            "web/themes/custom/{$name}": ["type:drupal-custom-theme"]
-        },
-        "drupal-core-project-message": {
-            "include-keys": ["homepage", "support"],
-            "post-create-project-cmd-message": [
-                "<bg=blue;fg=white>                                                         </>",
-                "<bg=blue;fg=white>  Congratulations, you’ve installed the Drupal codebase  </>",
-                "<bg=blue;fg=white>  from the drupal/recommended-project template!          </>",
-                "<bg=blue;fg=white>                                                         </>",
-                "",
-                "<bg=yellow;fg=black>Next steps</>:",
-
-                "  * Install the site: https://www.drupal.org/docs/8/install",
-                "  * Read the user guide: https://www.drupal.org/docs/user_guide/en/index.html",
-                "  * Get support: https://www.drupal.org/support",
-                "  * Get involved with the Drupal community:",
-                "      https://www.drupal.org/getting-involved",
-                "  * Remove the plugin that prints this message:",
-                "      composer remove drupal/core-project-message"
-            ]
-        }
+            "docroot/core": [
+        	"type:drupal-core"
+      	],
+        "docroot/libraries/{$name}": [
+        "type:drupal-library",
+        "type:bower-asset",
+        "type:npm-asset"
+      	],
+        "docroot/modules/contrib/{$name}": [
+          "type:drupal-module"
+        ],
+        "docroot/profiles/contrib/{$name}": [
+          "type:drupal-profile"
+        ],
+        "docroot/themes/contrib/{$name}": [
+          "type:drupal-theme"
+        ]
+       },
+       "drupal-scaffold": {
+      "initial": {
+        ".editorconfig": "../.editorconfig",
+        ".gitattributes": "../.gitattributes"
+      }
+    } 
     }
 }
